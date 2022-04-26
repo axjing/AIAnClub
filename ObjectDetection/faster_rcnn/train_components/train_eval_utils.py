@@ -6,7 +6,7 @@ import torch
 
 from .coco_utils import get_coco_api_from_dataset
 from .coco_eval import CocoEvaluator
-import train_utils.distributed_utils as utils
+import train_components.distributed_utils as utils
 
 
 def train_one_epoch(model, optimizer, data_loader, device, epoch,

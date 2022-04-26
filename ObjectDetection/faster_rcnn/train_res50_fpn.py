@@ -6,9 +6,9 @@ import torch
 import transforms
 from network_files import FasterRCNN, FastRCNNPredictor
 from backbone import resnet50_fpn_backbone
-from my_dataset import VOCDataSet
-from train_utils import GroupedBatchSampler, create_aspect_ratio_groups
-from train_utils import train_eval_utils as utils
+from datasets.my_dataset import VOCDataSet
+from train_components import GroupedBatchSampler, create_aspect_ratio_groups
+from train_components import train_eval_utils as utils
 
 
 def create_model(num_classes, load_pretrain_weights=True):

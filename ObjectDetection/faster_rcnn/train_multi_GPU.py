@@ -5,11 +5,11 @@ import datetime
 import torch
 
 import transforms
-from my_dataset import VOCDataSet
+from datasets.my_dataset import VOCDataSet
 from backbone import resnet50_fpn_backbone
 from network_files import FasterRCNN, FastRCNNPredictor
-import train_utils.train_eval_utils as utils
-from train_utils import GroupedBatchSampler, create_aspect_ratio_groups, init_distributed_mode, save_on_master, mkdir
+import train_components.train_eval_utils as utils
+from train_components import GroupedBatchSampler, create_aspect_ratio_groups, init_distributed_mode, save_on_master, mkdir
 
 
 def create_model(num_classes):

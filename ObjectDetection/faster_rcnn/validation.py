@@ -13,8 +13,8 @@ import numpy as np
 import transforms
 from network_files import FasterRCNN
 from backbone import resnet50_fpn_backbone
-from my_dataset import VOCDataSet
-from train_utils import get_coco_api_from_dataset, CocoEvaluator
+from datasets.my_dataset import VOCDataSet
+from train_components import get_coco_api_from_dataset, CocoEvaluator
 
 
 def summarize(self, catId=None):

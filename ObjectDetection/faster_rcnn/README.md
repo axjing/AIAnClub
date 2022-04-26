@@ -15,8 +15,8 @@
 ```
   ├── backbone: 特征提取网络，可以根据自己的要求选择
   ├── network_files: Faster R-CNN网络（包括Fast R-CNN以及RPN等模块）
-  ├── train_utils: 训练验证相关模块（包括cocotools）
-  ├── my_dataset.py: 自定义dataset用于读取VOC数据集
+  ├── train_components: 训练验证相关模块（包括cocotools）
+  ├── dataset..py: 自定义dataset用于读取VOC数据集
   ├── train_mobilenet.py: 以MobileNetV2做为backbone进行训练
   ├── train_resnet50_fpn.py: 以resnet50+FPN做为backbone进行训练
   ├── train_multi_GPU.py: 针对使用多GPU的用户使用
