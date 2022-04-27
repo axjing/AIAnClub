@@ -14,7 +14,8 @@ CMakeLists.txt
 #C++
 # Prerequisites
 *.d
-
+VOCdevkit
+DataBase
 # Compiled Object files
 *.slo
 *.lo
