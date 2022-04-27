@@ -4,8 +4,8 @@ import datetime
 import torch
 
 import transforms
-from network_files import FasterRCNN, FastRCNNPredictor
-from backbone import resnet50_fpn_backbone
+from models.network_files import FasterRCNN, FastRCNNPredictor
+from models.backbone import resnet50_fpn_backbone
 from datasets.my_dataset import VOCDataSet
 from train_components import GroupedBatchSampler, create_aspect_ratio_groups
 from train_components import train_eval_utils as utils
@@ -17,7 +17,8 @@ def create_model(num_classes, load_pretrain_weights=True):
     # 如果GPU显存很大可以设置比较大的batch_size就可以将norm_layer设置为普通的BatchNorm2d
     # trainable_layers包括['layer4', 'layer3', 'layer2', 'layer1', 'conv1']， 5代表全部训练
     # resnet50 imagenet weights url: https://download.pytorch.org/models/resnet50-0676ba61.pth
-    backbone = resnet50_fpn_backbone(pretrain_path="resnet50.pth",
+    pretrain_path = "./checkpoints/pretrain_weights/resnet50-0676ba61.pth"
+    backbone = resnet50_fpn_backbone(pretrain_path=pretrain_path,
                                      norm_layer=torch.nn.BatchNorm2d,
                                      trainable_layers=3)
     # 训练自己数据集时不要修改这里的91，修改的是传入的num_classes参数
@@ -26,7 +27,8 @@ def create_model(num_classes, load_pretrain_weights=True):
     if load_pretrain_weights:
         # 载入预训练模型权重
         # https://download.pytorch.org/models/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth
-        weights_dict = torch.load("./backbone/fasterrcnn_resnet50_fpn_coco.pth", map_location='cpu')
+        pretrain_path = "./checkpoints/pretrain_weights/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth"
+        weights_dict = torch.load(pretrain_path, map_location='cpu')
         missing_keys, unexpected_keys = model.load_state_dict(weights_dict, strict=False)
         if len(missing_keys) != 0 or len(unexpected_keys) != 0:
             print("missing_keys: ", missing_keys)
@@ -188,15 +190,15 @@ if __name__ == "__main__":
         description=__doc__)
 
     # 训练设备类型
-    parser.add_argument('--device', default='cuda:0', help='device')
+    parser.add_argument('--device', default='cpu', help='device')
     # 训练数据集的根目录(VOCdevkit)
-    parser.add_argument('--data-path', default='./', help='dataset')
+    parser.add_argument('--data_path', default=r'C:\Users\admin\Downloads', help='dataset')
     # 检测目标类别数(不包含背景)
     parser.add_argument('--num-classes', default=20, type=int, help='num_classes')
     # 文件保存地址
-    parser.add_argument('--output-dir', default='./save_weights', help='path where to save')
+    parser.add_argument('--output-dir', default='./checkpoints/save_weights', help='path where to save')
     # 若需要接着上次训练，则指定上次训练保存权重文件地址
-    parser.add_argument('--resume', default='', type=str, help='resume from checkpoint')
+    parser.add_argument('--resume', default='', type=str, help='resume from checkpoints')
     # 指定接着从哪个epoch数开始训练
     parser.add_argument('--start_epoch', default=0, type=int, help='start epoch')
     # 训练的总epoch数
@@ -214,7 +216,7 @@ if __name__ == "__main__":
                         metavar='W', help='weight decay (default: 1e-4)',
                         dest='weight_decay')
     # 训练的batch size
-    parser.add_argument('--batch_size', default=8, type=int, metavar='N',
+    parser.add_argument('--batch_size', default=1, type=int, metavar='N',
                         help='batch size when training.')
     parser.add_argument('--aspect-ratio-group-factor', default=3, type=int)
     # 是否使用混合精度训练(需要GPU支持混合精度)

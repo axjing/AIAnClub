@@ -3,14 +3,13 @@ import time
 import json
 
 import torch
-import torchvision
 from PIL import Image
 import matplotlib.pyplot as plt
 
 from torchvision import transforms
-from network_files import FasterRCNN, FastRCNNPredictor, AnchorsGenerator
-from backbone import resnet50_fpn_backbone, MobileNetV2
-from draw_box_utils import draw_objs
+from models.network_files import FasterRCNN
+import models.backbone
+from utils.draw_box_utils import draw_objs
 
 
 def create_model(num_classes):
@@ -32,7 +31,7 @@ def create_model(num_classes):
 
     # resNet50+fpn+faster_RCNN
     # 注意，这里的norm_layer要和训练脚本中保持一致
-    backbone = resnet50_fpn_backbone(norm_layer=torch.nn.BatchNorm2d)
+    backbone = models.backbone.resnet50_fpn_backbone(norm_layer=torch.nn.BatchNorm2d)
     model = FasterRCNN(backbone=backbone, num_classes=num_classes, rpn_score_thresh=0.5)
 
     return model
@@ -52,7 +51,7 @@ def main():
     model = create_model(num_classes=21)
 
     # load train weights
-    weights_path = "./save_weights/model.pth"
+    weights_path = "checkpoints/save_weights/model.pth"
     assert os.path.exists(weights_path), "{} file dose not exist.".format(weights_path)
     model.load_state_dict(torch.load(weights_path, map_location='cpu')["model"])
     model.to(device)

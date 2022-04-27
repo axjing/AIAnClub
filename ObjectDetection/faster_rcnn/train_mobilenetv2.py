@@ -5,8 +5,8 @@ import torch
 import torchvision
 
 import transforms
-from network_files import FasterRCNN, AnchorsGenerator
-from backbone import MobileNetV2, vgg
+from models.network_files import FasterRCNN, AnchorsGenerator
+from models.backbone import MobileNetV2
 from datasets.my_dataset import VOCDataSet
 from train_components import GroupedBatchSampler, create_aspect_ratio_groups
 from train_components import train_eval_utils as utils
@@ -20,7 +20,7 @@ def create_model(num_classes):
     # backbone.out_channels = 512
 
     # https://download.pytorch.org/models/mobilenet_v2-b0353104.pth
-    backbone = MobileNetV2(weights_path="./backbone/mobilenet_v2.pth").features
+    backbone = MobileNetV2(weights_path="models/backbone/mobilenet_v2.pth").features
     backbone.out_channels = 1280  # 设置对应backbone输出特征矩阵的channels
 
     anchor_generator = AnchorsGenerator(sizes=((32, 64, 128, 256, 512),),
@@ -46,8 +46,8 @@ def main():
     results_file = "results{}.txt".format(datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
 
     # 检查保存权重文件夹是否存在，不存在则创建
-    if not os.path.exists("save_weights"):
-        os.makedirs("save_weights")
+    if not os.path.exists("checkpoints/save_weights"):
+        os.makedirs("checkpoints/save_weights")
 
     data_transform = {
         "train": transforms.Compose([transforms.ToTensor(),
@@ -152,7 +152,7 @@ def main():
 
         val_map.append(coco_info[1])  # pascal mAP
 
-    torch.save(model.state_dict(), "./save_weights/pretrain.pth")
+    torch.save(model.state_dict(), "checkpoints/save_weights/pretrain.pth")
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #  second unfrozen backbone and train all network     #

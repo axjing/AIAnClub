@@ -34,7 +34,7 @@ class VOCDataSet(Dataset):
             assert os.path.exists(xml_path), "not found '{}' file.".format(xml_path)
 
         # read class_indict
-        json_file = './pascal_voc_classes.json'
+        json_file = './configurations/pascal_voc_classes.json'
         assert os.path.exists(json_file), "{} file not exist.".format(json_file)
         with open(json_file, 'r') as f:
             self.class_dict = json.load(f)

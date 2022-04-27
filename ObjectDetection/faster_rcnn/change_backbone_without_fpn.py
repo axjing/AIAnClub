@@ -4,7 +4,7 @@ import datetime
 import torch
 
 import transforms
-from network_files import FasterRCNN, AnchorsGenerator
+from models.network_files import FasterRCNN, AnchorsGenerator
 from datasets.my_dataset import VOCDataSet
 from train_components import GroupedBatchSampler, create_aspect_ratio_groups
 from train_components import train_eval_utils as utils
@@ -209,7 +209,7 @@ if __name__ == "__main__":
     # 文件保存地址
     parser.add_argument('--output-dir', default='./save_weights', help='path where to save')
     # 若需要接着上次训练，则指定上次训练保存权重文件地址
-    parser.add_argument('--resume', default='', type=str, help='resume from checkpoint')
+    parser.add_argument('--resume', default='', type=str, help='resume from checkpoints')
     # 指定接着从哪个epoch数开始训练
     parser.add_argument('--start_epoch', default=0, type=int, help='start epoch')
     # 训练的总epoch数

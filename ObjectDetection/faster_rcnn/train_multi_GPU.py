@@ -6,8 +6,8 @@ import torch
 
 import transforms
 from datasets.my_dataset import VOCDataSet
-from backbone import resnet50_fpn_backbone
-from network_files import FasterRCNN, FastRCNNPredictor
+from models.backbone import resnet50_fpn_backbone
+from models.network_files import FasterRCNN, FastRCNNPredictor
 import train_components.train_eval_utils as utils
 from train_components import GroupedBatchSampler, create_aspect_ratio_groups, init_distributed_mode, save_on_master, mkdir
 
@@ -235,7 +235,7 @@ if __name__ == "__main__":
     # 文件保存地址
     parser.add_argument('--output-dir', default='./multi_train', help='path where to save')
     # 基于上次的训练结果接着训练
-    parser.add_argument('--resume', default='', help='resume from checkpoint')
+    parser.add_argument('--resume', default='', help='resume from checkpoints')
     parser.add_argument('--aspect-ratio-group-factor', default=3, type=int)
     # 不训练，仅测试
     parser.add_argument(
