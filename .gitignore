@@ -15,7 +15,7 @@ CMakeLists.txt
 # Prerequisites
 *.d
 VOCdevkit
-DataBase
+# DataBase
 # Compiled Object files
 *.slo
 *.lo

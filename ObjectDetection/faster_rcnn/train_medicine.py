@@ -32,8 +32,9 @@ def create_model(num_classes, load_pretrain_weights=True):
         if os.path.exists(pretrain_path):
             weights_dict = torch.load(pretrain_path, map_location='cpu')
         else:
+            dir = os.path.split(pretrain_path)[0]
             url_add = "https://github.com/axjing/AIAnClub/releases/download/v0.0.0.1/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth"
-            weights_dict = load_state_dict_from_url(url=url_add, model_dir=pretrain_path, map_location='cpu')
+            weights_dict = load_state_dict_from_url(url=url_add, model_dir=dir, map_location='cpu')
         assert os.path.exists(pretrain_path), "{} is not exist.".format(pretrain_path)
         missing_keys, unexpected_keys = model.load_state_dict(weights_dict, strict=False)
         if len(missing_keys) != 0 or len(unexpected_keys) != 0:

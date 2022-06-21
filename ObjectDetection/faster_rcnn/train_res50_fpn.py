@@ -1,15 +1,21 @@
 import os
 import datetime
-
+import sys
 import torch
 
 import transforms
+from torch.hub import load_state_dict_from_url
 from models.networks import FasterRCNN, FastRCNNPredictor
 from models.backbone import resnet50_fpn_backbone
 from datasets.dataset import VOCDataSet
 from train_components import GroupedBatchSampler, create_aspect_ratio_groups
 from train_components import train_eval_utils as utils
-
+from pathlib import Path
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[0]  # YOLOv5 root directory
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))  # add ROOT to PATH
+ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
 def create_model(num_classes, load_pretrain_weights=True):
     # 注意，这里的backbone默认使用的是FrozenBatchNorm2d，即不会去更新bn参数
@@ -28,11 +34,27 @@ def create_model(num_classes, load_pretrain_weights=True):
         # 载入预训练模型权重
         # https://download.pytorch.org/models/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth
         pretrain_path = "./checkpoints/pretrain_weights/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth"
-        weights_dict = torch.load(pretrain_path, map_location='cpu')
+        if os.path.exists(pretrain_path):
+            weights_dict = torch.load(pretrain_path, map_location='cpu')
+        else:
+            dir = os.path.split(pretrain_path)[0]
+            url_add = "https://github.com/axjing/AIAnClub/releases/download/v0.0.0.1/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth"
+            weights_dict = load_state_dict_from_url(url=url_add, model_dir=dir, map_location='cpu')
+        assert os.path.exists(pretrain_path), "{} is not exist.".format(pretrain_path)
         missing_keys, unexpected_keys = model.load_state_dict(weights_dict, strict=False)
         if len(missing_keys) != 0 or len(unexpected_keys) != 0:
             print("missing_keys: ", missing_keys)
             print("unexpected_keys: ", unexpected_keys)
+    
+    # if load_pretrain_weights:
+    #     # 载入预训练模型权重
+    #     # https://download.pytorch.org/models/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth
+    #     pretrain_path = "./checkpoints/pretrain_weights/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth"
+    #     weights_dict = torch.load(pretrain_path, map_location='cpu')
+    #     missing_keys, unexpected_keys = model.load_state_dict(weights_dict, strict=False)
+    #     if len(missing_keys) != 0 or len(unexpected_keys) != 0:
+    #         print("missing_keys: ", missing_keys)
+    #         print("unexpected_keys: ", unexpected_keys)
 
     # get number of input features for the classifier
     in_features = model.roi_heads.box_predictor.cls_score.in_features
