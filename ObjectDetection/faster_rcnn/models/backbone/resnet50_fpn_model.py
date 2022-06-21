@@ -5,7 +5,7 @@ import torch.nn as nn
 from torchvision.ops.misc import FrozenBatchNorm2d
 
 from .feature_pyramid_network import BackboneWithFPN, LastLevelMaxPool
-
+from torch.hub import load_state_dict_from_url
 
 class Bottleneck(nn.Module):
     expansion = 4
@@ -161,9 +161,15 @@ def resnet50_fpn_backbone(pretrain_path="",
         overwrite_eps(resnet_backbone, 0.0)
 
     if pretrain_path != "":
+        if os.path.exists(pretrain_path):
+            state_dict = torch.load(pretrain_path)
+        else:
+            dir = os.path.split(pretrain_path)[0]
+            url_add = "https://github.com/axjing/AIAnClub/releases/download/v0.0.0.1/resnet50-0676ba61.pth"
+            state_dict = load_state_dict_from_url(url=url_add, model_dir=dir)
         assert os.path.exists(pretrain_path), "{} is not exist.".format(pretrain_path)
         # 载入预训练权重
-        print(resnet_backbone.load_state_dict(torch.load(pretrain_path), strict=False))
+        print(resnet_backbone.load_state_dict(state_dict, strict=False))
 
     # select layers that wont be frozen
     assert 0 <= trainable_layers <= 5

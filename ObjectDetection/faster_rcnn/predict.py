@@ -7,7 +7,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 from torchvision import transforms
-from models.network_files import FasterRCNN
+from models.networks import FasterRCNN
 import models.backbone
 from utils.draw_box_utils import draw_objs
 

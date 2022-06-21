@@ -4,9 +4,9 @@ import datetime
 import torch
 
 import transforms
-from models.network_files import FasterRCNN, FastRCNNPredictor
+from models.networks import FasterRCNN, FastRCNNPredictor
 from models.backbone import resnet50_fpn_backbone
-from datasets.my_dataset import VOCDataSet
+from datasets.dataset import VOCDataSet
 from train_components import GroupedBatchSampler, create_aspect_ratio_groups
 from train_components import train_eval_utils as utils
 

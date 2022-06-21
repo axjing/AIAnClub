@@ -5,9 +5,9 @@ import torch
 import torchvision
 
 import transforms
-from models.network_files import FasterRCNN, AnchorsGenerator
+from models.networks import FasterRCNN, AnchorsGenerator
 from models.backbone import MobileNetV2
-from datasets.my_dataset import VOCDataSet
+from datasets.dataset import VOCDataSet
 from train_components import GroupedBatchSampler, create_aspect_ratio_groups
 from train_components import train_eval_utils as utils
 

@@ -11,9 +11,9 @@ from tqdm import tqdm
 import numpy as np
 
 import transforms
-from models.network_files import FasterRCNN
+from models.networks import FasterRCNN
 from models.backbone import resnet50_fpn_backbone
-from datasets.my_dataset import VOCDataSet
+from datasets.dataset import VOCDataSet
 from train_components import get_coco_api_from_dataset, CocoEvaluator
 
 

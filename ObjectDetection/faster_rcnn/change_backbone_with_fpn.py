@@ -4,8 +4,8 @@ import datetime
 import torch
 
 import transforms
-from models.network_files import FasterRCNN, AnchorsGenerator
-from datasets.my_dataset import VOCDataSet
+from models.networks import FasterRCNN, AnchorsGenerator
+from datasets.dataset import VOCDataSet
 from train_components import GroupedBatchSampler, create_aspect_ratio_groups
 from train_components import train_eval_utils as utils
 from models.backbone import BackboneWithFPN, LastLevelMaxPool
