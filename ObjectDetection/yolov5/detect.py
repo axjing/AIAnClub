@@ -32,11 +32,12 @@ from pathlib import Path
 import torch
 import torch.backends.cudnn as cudnn
 
-FILE = Path(__file__).resolve()
-ROOT = FILE.parents[0]  # YOLOv5 root directory
-if str(ROOT) not in sys.path:
-    sys.path.append(str(ROOT))  # add ROOT to PATH
-ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
+FILE = Path(__file__).resolve() # 当前脚本文件的绝对路径
+ROOT = FILE.parents[0]  # YOLOv5 root directory 当前脚本文件的父目录
+
+if str(ROOT) not in sys.path: #  sys.path python解释器模块的搜索路径列表
+    sys.path.append(str(ROOT))  # add ROOT to PATH 将ROOT到搜索路径中
+ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative 将绝对路径转换为相对路径
 
 from models.common import DetectMultiBackend
 from utils.dataloaders import IMG_FORMATS, VID_FORMATS, LoadImages, LoadStreams
