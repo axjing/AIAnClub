@@ -119,7 +119,7 @@ def run(
         dt[0] += t2 - t1
 
         # Inference
-        visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False
+        visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False  # 是否保存中间特征图
         pred = model(im, augment=augment, visualize=visualize)
         t3 = time_sync()
         dt[1] += t3 - t2
