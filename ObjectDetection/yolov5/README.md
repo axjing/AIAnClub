@@ -3,6 +3,8 @@
    <a align="left" href="https://ultralytics.com/yolov5" target="_blank">
    <img width="850" src="https://github.com/ultralytics/yolov5/releases/download/v1.0/splash.jpg"></a>
 </p>
+
+English | [简体中文](.github/README_cn.md)
 <br>
 <div>
    <a href="https://github.com/ultralytics/yolov5/actions/workflows/ci-testing.yml"><img src="https://github.com/ultralytics/yolov5/actions/workflows/ci-testing.yml/badge.svg" alt="CI CPU testing"></a>

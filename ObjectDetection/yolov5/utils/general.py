@@ -334,10 +334,7 @@ def check_version(current='0.0.0', minimum='0.0.0', name='version ', pinned=Fals
 
 @try_except
 def check_requirements(requirements=ROOT / 'requirements.txt', exclude=(), install=True, cmds=()):
-    """
     # Check installed dependencies meet requirements (pass *.txt file or list of packages)
-    """
-
     prefix = colorstr('red', 'bold', 'requirements:')
     check_python()  # check python version
     if isinstance(requirements, (str, Path)):  # requirements.txt file
@@ -419,9 +416,7 @@ def check_file(file, suffix=''):
     # Search/download file (if necessary) and return path
     check_suffix(file, suffix)  # optional
     file = str(file)  # convert to str()
-    print(file)
     if Path(file).is_file() or not file:  # exists
-        print("==========================:\t{}\t".format(file))
         return file
     elif file.startswith(('http:/', 'https:/')):  # download
         url = file  # warning: Pathlib turns :// -> :/
@@ -570,7 +565,7 @@ def download(url, dir='.', unzip=True, delete=True, curl=False, threads=1, retry
                     LOGGER.warning(f'Download failure, retrying {i + 1}/{retry} {url}...')
                 else:
                     LOGGER.warning(f'Failed to download {url}...')
-        print(f)
+
         if unzip and success and f.suffix in ('.zip', '.gz'):
             LOGGER.info(f'Unzipping {f}...')
             if f.suffix == '.zip':

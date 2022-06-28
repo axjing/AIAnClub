@@ -11,7 +11,7 @@ from datasets.dataset import IADataset
 from train_components import GroupedBatchSampler, create_aspect_ratio_groups
 from train_components import train_eval_utils as utils
 from torch.hub import load_state_dict_from_url
-
+import torchvision.models.detection.faster_rcnn
 
 def create_model(num_classes, load_pretrain_weights=True):
     # 注意，这里的backbone默认使用的是FrozenBatchNorm2d，即不会去更新bn参数
