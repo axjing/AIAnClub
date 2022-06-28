@@ -2,8 +2,14 @@ import torchvision.models.detection
 
 import os
 import datetime
-
 import torch
+import sys
+from pathlib import Path
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[0]  # YOLOv5 root directory
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))  # add ROOT to PATH
+ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 import transforms
 from models.networks import FasterRCNN, FastRCNNPredictor
 from models.backbone import resnet50_fpn_backbone
@@ -11,7 +17,6 @@ from datasets.dataset import IADataset
 from train_components import GroupedBatchSampler, create_aspect_ratio_groups
 from train_components import train_eval_utils as utils
 from torch.hub import load_state_dict_from_url
-import torchvision.models.detection.faster_rcnn
 
 def create_model(num_classes, load_pretrain_weights=True):
     # 注意，这里的backbone默认使用的是FrozenBatchNorm2d，即不会去更新bn参数

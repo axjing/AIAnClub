@@ -676,4 +676,4 @@ def add_dir_mv_file(src_path, video_dir):
 
 
 if __name__ == "__main__":
-    path="/home/dell/jing/Coding/DATA/FromIA/train/C1xD240xH356xW356_3D/huangxiuping_C40W120/huangxiuping_C40W120_data_f32.pkl"
+    path="/home/dell/jing/Coding/DATA/FromIA/train/C1xD240xH356xW356_l"
