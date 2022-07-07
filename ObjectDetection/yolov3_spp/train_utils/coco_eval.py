@@ -116,7 +116,7 @@ class CocoEvaluator(object):
                     {
                         "image_id": original_id,
                         "category_id": labels[k],
-                        "segmentation": rle,
+                        "Segmentation": rle,
                         "score": scores[k],
                     }
                     for k, rle in enumerate(rles)
@@ -262,18 +262,18 @@ def loadRes(self, resFile):
         for id, ann in enumerate(anns):
             bb = ann['bbox']
             x1, x2, y1, y2 = [bb[0], bb[0] + bb[2], bb[1], bb[1] + bb[3]]
-            if 'segmentation' not in ann:
-                ann['segmentation'] = [[x1, y1, x1, y2, x2, y2, x2, y1]]
+            if 'Segmentation' not in ann:
+                ann['Segmentation'] = [[x1, y1, x1, y2, x2, y2, x2, y1]]
             ann['area'] = bb[2] * bb[3]
             ann['id'] = id + 1
             ann['iscrowd'] = 0
-    elif 'segmentation' in anns[0]:
+    elif 'Segmentation' in anns[0]:
         res.dataset['categories'] = copy.deepcopy(self.dataset['categories'])
         for id, ann in enumerate(anns):
-            # now only support compressed RLE format as segmentation results
-            ann['area'] = maskUtils.area(ann['segmentation'])
+            # now only support compressed RLE format as Segmentation results
+            ann['area'] = maskUtils.area(ann['Segmentation'])
             if 'bbox' not in ann:
-                ann['bbox'] = maskUtils.toBbox(ann['segmentation'])
+                ann['bbox'] = maskUtils.toBbox(ann['Segmentation'])
             ann['id'] = id + 1
             ann['iscrowd'] = 0
     elif 'keypoints' in anns[0]:

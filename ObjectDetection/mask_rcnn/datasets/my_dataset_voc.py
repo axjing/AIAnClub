@@ -99,7 +99,7 @@ class VOCInstances(Dataset):
             idx (int): Index
 
         Returns:
-            tuple: (image, target) where target is the image segmentation.
+            tuple: (image, target) where target is the image Segmentation.
         """
         img = Image.open(self.images_path[idx]).convert('RGB')
         target = self.objects_bboxes[idx]

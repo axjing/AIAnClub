@@ -116,7 +116,7 @@ class EvalCOCOMetric:
 
                 res = {"image_id": img_id,
                        "category_id": class_idx,
-                       "segmentation": rle,
+                       "Segmentation": rle,
                        "score": round(score, 3)}
                 res_list.append(res)
             self.results.append(res_list)

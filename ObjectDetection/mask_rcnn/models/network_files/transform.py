@@ -378,7 +378,7 @@ class GeneralizedRCNNTransform(nn.Module):
         for img, pad_img in zip(images, batched_imgs):
             # 将输入images中的每张图片复制到新的batched_imgs的每张图片中，对齐左上角，保证bboxes的坐标不变
             # 这样保证输入到网络中一个batch的每张图片的shape相同
-            # copy_: Copies the elements from src into self tensor and returns self
+            # copy_: Copies the elements from models into self tensor and returns self
             pad_img[: img.shape[0], : img.shape[1], : img.shape[2]].copy_(img)
 
         return batched_imgs

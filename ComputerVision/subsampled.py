@@ -62,7 +62,7 @@ if __name__=="__main__":
     # subsampled(path,path,10)
 
     cv2.namedWindow("input image",cv2.WINDOW_AUTOSIZE)    #创建GUI窗口,形式为自适应
-    # cv2.imshow("input image",src) 
+    # cv2.imshow("input image",models)
     upsampled(path)
     cv2.waitKey(0)   #等待用户操作，里面等待参数是毫秒，我们填写0，代表是永远，等待用户操作
     cv2.destroyAllWindows()  #销毁所有窗口

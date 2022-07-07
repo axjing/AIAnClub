@@ -85,7 +85,7 @@ class CocoDetection(data.Dataset):
         area = torch.tensor([obj["area"] for obj in anno])
         iscrowd = torch.tensor([obj["iscrowd"] for obj in anno])
 
-        segmentations = [obj["segmentation"] for obj in anno]
+        segmentations = [obj["Segmentation"] for obj in anno]
         masks = convert_coco_poly_mask(segmentations, h, w)
 
         # 筛选出合法的目标，即x_max>x_min且y_max>y_min

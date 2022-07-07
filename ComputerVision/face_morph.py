@@ -17,14 +17,14 @@ def readPoints(path) :
 
     return points
 
-# Apply affine transform calculated using srcTri and dstTri to src and
+# Apply affine transform calculated using srcTri and dstTri to models and
 # output an image of size.
 def applyAffineTransform(src, srcTri, dstTri, size) :
     
     # Given a pair of triangles, find the affine transform.
     warpMat = cv2.getAffineTransform( np.float32(srcTri), np.float32(dstTri) )
     
-    # Apply the Affine Transform just found to the src image
+    # Apply the Affine Transform just found to the models image
     dst = cv2.warpAffine( src, warpMat, (size[0], size[1]), None, flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT_101 )
 
     return dst

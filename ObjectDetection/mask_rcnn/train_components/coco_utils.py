@@ -89,7 +89,7 @@ def convert_to_coco_api(self):
                    "id": ann_id}
             categories.add(labels[i])
             if "masks" in targets:
-                ann["segmentation"] = coco_mask.encode(masks[i].numpy())
+                ann["Segmentation"] = coco_mask.encode(masks[i].numpy())
             dataset["annotations"].append(ann)
             ann_id += 1
     dataset["categories"] = [{"id": i} for i in sorted(categories)]

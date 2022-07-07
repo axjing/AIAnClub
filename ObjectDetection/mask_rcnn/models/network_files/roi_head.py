@@ -95,7 +95,7 @@ def maskrcnn_inference(x, labels):
 def project_masks_on_boxes(gt_masks, boxes, matched_idxs, M):
     # type: (Tensor, Tensor, Tensor, int) -> Tensor
     """
-    Given segmentation masks and the bounding boxes corresponding
+    Given Segmentation masks and the bounding boxes corresponding
     to the location of the masks in the image, this function
     crops and resizes the masks in the position defined by the
     boxes. This prepares the masks for them to be fed to the

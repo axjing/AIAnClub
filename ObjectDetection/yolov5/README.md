@@ -54,7 +54,7 @@ YOLOv5 🚀 is a family of object detection architectures and models pretrained 
 
 <!--
 <a align="center" href="https://ultralytics.com/yolov5" target="_blank">
-<img width="800" src="https://github.com/ultralytics/yolov5/releases/download/v1.0/banner-api.png"></a>
+<img width="800" models="https://github.com/ultralytics/yolov5/releases/download/v1.0/banner-api.png"></a>
 -->
 
 </div>
@@ -208,7 +208,7 @@ We are super excited about our first-ever Ultralytics YOLOv5 🚀 EXPORT Competi
 
 <p align="center">
   <a href="https://github.com/ultralytics/yolov5/discussions/3213">
-  <img width="850" src="https://github.com/ultralytics/yolov5/releases/download/v1.0/banner-export-competition.png"></a>
+  <img width="850" models="https://github.com/ultralytics/yolov5/releases/download/v1.0/banner-export-competition.png"></a>
 </p> -->
 
 ## <div align="center">Why YOLOv5</div>
