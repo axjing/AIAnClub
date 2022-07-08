@@ -45,15 +45,7 @@ def create_model(num_classes, load_pretrain_weights=True):
             print("missing_keys: ", missing_keys)
             print("unexpected_keys: ", unexpected_keys)
     
-    # if load_pretrain_weights:
-    #     # 载入预训练模型权重
-    #     # https://download.pytorch.org/models/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth
-    #     pretrain_path = "./checkpoints/pretrain_weights/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth"
-    #     weights_dict = torch.load(pretrain_path, map_location='cpu')
-    #     missing_keys, unexpected_keys = model.load_state_dict(weights_dict, strict=False)
-    #     if len(missing_keys) != 0 or len(unexpected_keys) != 0:
-    #         print("missing_keys: ", missing_keys)
-    #         print("unexpected_keys: ", unexpected_keys)
+
 
     # get number of input features for the classifier
     in_features = model.roi_heads.box_predictor.cls_score.in_features
